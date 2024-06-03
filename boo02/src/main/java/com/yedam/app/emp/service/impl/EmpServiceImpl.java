@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yedam.app.dept.mapper.DeptMapper;
 import com.yedam.app.emp.mapper.EmpMapper;
 import com.yedam.app.emp.service.EmpService;
 import com.yedam.app.emp.service.EmpVO;
@@ -19,8 +18,6 @@ public class EmpServiceImpl  implements EmpService{
 	@Autowired
 	EmpMapper empMapper;
 	
-	@Autowired
-	DeptMapper deptMapper;
 	
 	@Override
 	public List<EmpVO> empList() {

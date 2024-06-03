@@ -32,25 +32,27 @@ public class EmpController {
 		List<EmpVO> list = empService.empList();
 		// 2)클라이언트에 전달할 데이터 담기
 		model.addAttribute("empList", list);
-		
-		
 		return "emp/list"; // 3)데이터를 출력할 페이지 결정
 	} // classpath:/templates/  emp/list .html            
 	  //  prefix                 return suffix	
 	
 	//단건조회
-	@GetMapping("empInfo")
+	@GetMapping("empInfo") // 커맨드객체 => QueryString(key=value&key=value)
 	public String empInfo(EmpVO empVO, Model model) {
 		// 1)해당 기능 수행 -> Service
 		EmpVO findVO = empService.empInfo(empVO);
 		// 2)클라이언트에 전달할 데이터 담기
 		model.addAttribute("empInfo", findVO);
 		return "emp/info";// 3)데이터를 출력할 페이지 결정
+		// "classpath:/templates/" + "emp/info" + ".html"
+		// => classpath:/templates/emp/info.html
+		// classpath => src/main/resources
 	}
 	
 	//등록 - 페이지
 	@GetMapping("empInsert")
-	public String empInsertForm() {
+	public String empInsertForm(Model model) {
+		model.addAttribute("empVO", new EmpVO());
 		return "emp/insert";
 	}
 	
@@ -82,12 +84,13 @@ public class EmpController {
 		return "emp/update";
 	}
 	//수정 - 처리 : AJAX => QueryString
-	@PostMapping("empUpdate")
+	//@PostMapping("empUpdate")
 	@ResponseBody //AJAX용 이라는 annotation
 	public Map<String, Object> empUpdateAJAXQueryString(EmpVO empVO){
 		return empService.empUpdate(empVO);
 	}
 	//수정 - 처리 : AJAX => JSON
+	@PostMapping("empUpdate")
 	@ResponseBody //AJAX용 이라는 annotation
 	public Map<String, Object> empUpdateAJAXJSON(@RequestBody EmpVO empVO){
 		return empService.empUpdate(empVO);
