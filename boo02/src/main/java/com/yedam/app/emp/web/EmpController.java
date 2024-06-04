@@ -85,7 +85,7 @@ public class EmpController {
 	}
 	//수정 - 처리 : AJAX => QueryString
 	//@PostMapping("empUpdate")
-	@ResponseBody //AJAX용 이라는 annotation
+	@ResponseBody //AJAX용 이라는 annotation 바로응답
 	public Map<String, Object> empUpdateAJAXQueryString(EmpVO empVO){
 		return empService.empUpdate(empVO);
 	}
