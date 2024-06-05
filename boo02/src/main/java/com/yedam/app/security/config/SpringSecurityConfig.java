@@ -46,8 +46,10 @@ public class SpringSecurityConfig {
 			.anyRequest().authenticated()
 		.and()
 		.formLogin()
+			.defaultSuccessUrl("/all")
 		.and()
-		.logout();
+		.logout()
+			.logoutSuccessUrl("/all");
 		
 		return http.build();
 	}
