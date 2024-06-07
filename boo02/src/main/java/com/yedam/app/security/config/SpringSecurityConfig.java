@@ -18,7 +18,7 @@ public class SpringSecurityConfig {
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+	/*
 	//메모리상 인증정보 등록 => 테스트 전용 방식
 	@Bean
 	InMemoryUserDetailsManager inMemoryUserDetailsService() {
@@ -35,7 +35,7 @@ public class SpringSecurityConfig {
 		
 		return new InMemoryUserDetailsManager(user, admin);
 	}
-	
+	*/
 	//인증 및 인가 설정
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -50,6 +50,8 @@ public class SpringSecurityConfig {
 		.and()
 		.logout()
 			.logoutSuccessUrl("/all");
+		
+		//http.csrf().disable();
 		
 		return http.build();
 	}
