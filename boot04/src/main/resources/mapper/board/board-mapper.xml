@@ -73,7 +73,7 @@
 	
 	<!-- 삭제 -->
 	<delete id="deleteBoardInfo" parameterType="int">
-		DELETE FROM baord
+		DELETE FROM board
 		WHERE bno = #{boardNo}
 	
 	</delete>

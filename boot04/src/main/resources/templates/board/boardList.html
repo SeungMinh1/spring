@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-		<table border="1px">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -20,7 +20,7 @@
 			</thead>
 			<tbody>
 				<th:block th:each="board : ${boardList}">
-					<tr>
+					<tr th:onclick="|location.href='@{boardInfo(bno=${board.bno})}'|"> 
 						<td>[[ ${board.bno} ]]</td>
 						<td>[[ ${board.title} ]]</td>
 						<td>[[ ${board.writer} ]]</td>
@@ -29,6 +29,9 @@
 				</th:block>
 			</tbody>
 		</table>
+	  <div>
+ 			<button type="button" th:onclick="|location.href='@{/boardInsert}'|" class="btn btn-primary">등록</button>
+  	 </div>
 	</div>
 </body>
 </html>
