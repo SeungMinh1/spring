@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yedam.app.book.mapper.BookMapper">
+
+
+	<!-- 도서 목록 조회 -->
+	<select id="selectBookAll" resultType="BookVO">
+		SELECT book_no
+		    , book_name
+		    , book_coverimg
+		    , book_date
+		    , book_price
+		    , book_publisher
+		    , book_info
+		FROM book_tbl_06
+		ORDER BY book_no
+		
+	</select>
+	
+	<select id="selectBookno" resultType="int">
+ 		SELECT NVL(MAX(book_no), 0)+1 
+		FROM book_tbl_06
+		
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="insertBookInfo" parameterType="BookVO">
+
+		
+		INSERT INTO book_tbl_06
+		 (
+		    book_no
+		    , book_name
+		    , book_coverimg
+		    , book_date
+		    , book_price
+		    , book_publisher
+		    , book_info
+		 )
+		VALUES
+		(
+		    #{bookNo}
+		    , #{bookName}
+		    , #{bookCoverimg}
+		    , #{bookDate}
+		    , #{bookPrice}
+		    , #{bookPublisher}
+		    , #{bookInfo}
+		)
+	</insert>
+	
+	<select id="selectrentAll" resultType="RentVO">
+		SELECT book_no as bookNo, (SELECT book_name FROM book_tbl_06 b WHERE b.book_no = r.book_no)as bookName, SUM(rent_price) as totalprice, COUNT(1) as count
+		FROM rent_tbl_06 r GROUP BY book_no ORDER BY book_no
+	</select>
+	
+
+</mapper>
